@@ -1,0 +1,15 @@
+spring.application.name=projeto_1
+
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
+jwt.secret=
+jwt.secretRefresh=
+jwt.expiration=3600000
+jwt.jwtRefreshExpirationMs=604800000
