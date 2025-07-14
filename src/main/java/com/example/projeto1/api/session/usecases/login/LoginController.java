@@ -19,7 +19,13 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+
         LoginResponse resp = loginService.login(request);
-        return ResponseEntity.ok(resp);
+
+        if (resp != null) {
+            return ResponseEntity.ok(resp);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

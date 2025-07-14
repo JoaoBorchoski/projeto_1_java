@@ -31,7 +31,7 @@ public class LoginService {
 
         User user = (User) auth.getPrincipal();
 
-        String accessToken = jwtTokenProvider.createAccessToken(user.getId().toString());
+        String accessToken = jwtTokenProvider.createAccessToken(user.getLogin());
         String refreshToken = UUID.randomUUID().toString();
 
         UserToken tokenEntity = new UserToken();

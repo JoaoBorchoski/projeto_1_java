@@ -1,4 +1,4 @@
-package com.example.projeto1.api.users.usecases.create;
+package com.example.projeto1.api.users.usecases;
 
 import com.example.projeto1.api.users.dto.CreateUserRequest;
 import com.example.projeto1.api.users.dto.UserResponse;
@@ -17,22 +17,16 @@ public class CreateUserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserResponse execute(CreateUserRequest req) {
-        // 1) checar se já existe
         userRepository.findByLogin(req.getLogin())
             .ifPresent(u -> { throw new IllegalArgumentException("Email já cadastrado"); });
 
-        // 2) montar entidade
         User user = new User();
-        // user.setId(UUID.randomUUID());
         user.setName(req.getName());
         user.setLogin(req.getLogin());
         user.setPassword(passwordEncoder.encode(req.getPassword()));
-        // flags default já vêm false
 
-        // 3) salvar
         User saved = userRepository.save(user);
 
-        // 4) mapear para response
         UserResponse resp = new UserResponse();
         resp.setId(saved.getId());
         resp.setName(saved.getName());
