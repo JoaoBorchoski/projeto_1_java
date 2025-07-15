@@ -1,9 +1,18 @@
 package com.example.projeto1.api.users.controller;
 
-import lombok.RequiredArgsConstructor;
+import java.net.URI;
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projeto1.api.users.dto.CreateUserRequest;
 import com.example.projeto1.api.users.dto.DeleteUserRequest;
@@ -16,8 +25,7 @@ import com.example.projeto1.api.users.usecases.GetUserService;
 import com.example.projeto1.api.users.usecases.PatchUserService;
 
 import jakarta.validation.Valid;
-import java.net.URI;
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/users")
@@ -57,7 +65,7 @@ public class UserController {
         DeleteUserRequest deleteUserRequest = new DeleteUserRequest();
         deleteUserRequest.setId(id);
         deleteUserService.execute(deleteUserRequest);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-    
+
 }

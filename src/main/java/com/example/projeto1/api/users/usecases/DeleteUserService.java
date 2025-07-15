@@ -17,8 +17,6 @@ public class DeleteUserService {
         userRepository.findById(req.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado: " + req.getId()));
 
-                //ResourceNotFoundException colocar
-
         userRepository.deleteById(req.getId());
     }
 }

@@ -1,14 +1,20 @@
 package com.example.projeto1.api.produtos.entity;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.time.Instant;
+import java.util.UUID;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.Instant;
-import java.util.UUID;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +32,15 @@ public class Produtos {
 
     @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "preco", nullable = false)
+    private Double preco;
+
+    @Column(name = "quantidade_estoque", nullable = false)
+    private Integer quantidadeEstoque;
+
+    @Column(name = "is_disabled", nullable = false)
+    private boolean isDisabled = false;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

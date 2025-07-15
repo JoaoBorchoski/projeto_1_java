@@ -1,12 +1,15 @@
 package com.example.projeto1.api.users.usecases;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.projeto1.api.exceptions.BadRequestException;
 import com.example.projeto1.api.users.dto.CreateUserRequest;
 import com.example.projeto1.api.users.dto.UserResponse;
 import com.example.projeto1.api.users.entity.User;
 import com.example.projeto1.api.users.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.password.PasswordEncoder;
 // import java.util.UUID;
 
 @Service
@@ -18,7 +21,9 @@ public class CreateUserService {
 
     public UserResponse execute(CreateUserRequest req) {
         userRepository.findByLogin(req.getLogin())
-            .ifPresent(u -> { throw new IllegalArgumentException("Email já cadastrado"); });
+                .ifPresent(u -> {
+                    throw new BadRequestException("Email já cadastrado");
+                });
 
         User user = new User();
         user.setName(req.getName());

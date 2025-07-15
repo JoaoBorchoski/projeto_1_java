@@ -2,6 +2,7 @@ package com.example.projeto1.api.users.usecases;
 
 import org.springframework.stereotype.Service;
 
+import com.example.projeto1.api.exceptions.ResourceNotFoundException;
 import com.example.projeto1.api.users.dto.GetUserRequest;
 import com.example.projeto1.api.users.dto.UserResponse;
 import com.example.projeto1.api.users.entity.User;
@@ -16,7 +17,7 @@ public class GetUserService {
 
     public UserResponse execute(GetUserRequest req) {
         User user = userRepository.findById(req.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + req.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado: " + req.getId()));
 
         UserResponse resp = new UserResponse();
         resp.setId(user.getId());
