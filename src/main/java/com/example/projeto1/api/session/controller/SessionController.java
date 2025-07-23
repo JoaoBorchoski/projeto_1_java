@@ -1,7 +1,5 @@
-package com.example.projeto1.api.session.usecases.login;
+package com.example.projeto1.api.session.controller;
 
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,11 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projeto1.api.session.dto.LoginRequest;
 import com.example.projeto1.api.session.dto.LoginResponse;
+import com.example.projeto1.api.session.usecases.LoginService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
-public class LoginController {
+public class SessionController {
     private final LoginService loginService;
 
     @PostMapping

@@ -1,4 +1,4 @@
-package com.example.projeto1.api.exceptions; // Sugestão de pacote, ajuste se necessário
+package com.example.projeto1.api.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

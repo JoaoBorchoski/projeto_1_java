@@ -1,4 +1,4 @@
-package com.example.projeto1.api.session.usecases.login;
+package com.example.projeto1.api.session.usecases;
 
 import java.time.Instant;
 import java.util.Optional;

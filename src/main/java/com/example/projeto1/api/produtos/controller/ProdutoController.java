@@ -3,6 +3,7 @@ package com.example.projeto1.api.produtos.controller;
 import java.net.URI;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.projeto1.api.produtos.dto.CreateProdutoRequest;
 import com.example.projeto1.api.produtos.dto.DeleteProdutoRequest;
 import com.example.projeto1.api.produtos.dto.GetProdutoRequest;
+import com.example.projeto1.api.produtos.dto.ListProdutoRequest;
 import com.example.projeto1.api.produtos.dto.PatchProdutoRequest;
 import com.example.projeto1.api.produtos.dto.ProdutoResponse;
+import com.example.projeto1.api.produtos.entity.Produtos;
 import com.example.projeto1.api.produtos.usecases.CreateProdutoService;
 import com.example.projeto1.api.produtos.usecases.DeleteProdutoService;
 import com.example.projeto1.api.produtos.usecases.GetProdutoService;
+import com.example.projeto1.api.produtos.usecases.ListProdutoService;
 import com.example.projeto1.api.produtos.usecases.PatchProdutoService;
 
 import jakarta.validation.Valid;
@@ -37,6 +41,7 @@ public class ProdutoController {
     private final GetProdutoService getProdutoService;
     private final PatchProdutoService patchProdutoService;
     private final DeleteProdutoService deleteProdutoService;
+    private final ListProdutoService listProdutoService;
 
     @PostMapping
     public ResponseEntity<ProdutoResponse> create(@Valid @RequestBody CreateProdutoRequest req) {
@@ -44,6 +49,12 @@ public class ProdutoController {
         return ResponseEntity
                 .created(URI.create("/produtos/" + produtoResponse.getId()))
                 .body(produtoResponse);
+    }
+
+    @PostMapping("/list")
+    public ResponseEntity<Page<Produtos>> list(@RequestBody(required = false) ListProdutoRequest request) {
+        Page<Produtos> produtosPage = listProdutoService.listProdutos(request);
+        return ResponseEntity.ok(produtosPage);
     }
 
     @GetMapping("/{id}")
